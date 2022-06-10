@@ -38,7 +38,6 @@ export default function Login() {
           source={require("../../share/img/Photo.png")}
           style={styles.image}
         >
-          <Image style={styles.avatar} />
 
           <KeyboardAvoidingView
             behavior={Platform.OS == "ios" ? "padding" : "height"}
@@ -145,16 +144,6 @@ const styles = StyleSheet.create({
     height: 50,
     marginBottom: 16,
     padding: 16,
-  },
-  avatar: {
-    zIndex: 1000,
-    left: 150,
-    top: 50,
-    resizeMode: "cover",
-    backgroundColor: "#F6F6F6",
-    width: 120,
-    height: 120,
-    borderRadius: 16,
   },
   hideButton: {
     left: 130,
