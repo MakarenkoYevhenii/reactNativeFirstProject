@@ -19,7 +19,7 @@ const initialState = {
   email: "",
   password: "",
 };
-export default function Login() {
+export default function Login({navigation}) {
   const [passwordHide, setHide] = useState(true);
   const [loginInfo, setLogin] = useState(initialState);
 
@@ -35,7 +35,7 @@ export default function Login() {
     >
       <View style={styles.container}>
         <ImageBackground
-          source={require("../../share/img/Photo.png")}
+          source={require("../../../share/img/Photo.png")}
           style={styles.image}
         >
 
@@ -49,7 +49,7 @@ export default function Login() {
                   style={{
                     textAlign: "center",
                     fontWeight: "bold",
-                    fontSize: "30px",
+                    fontSize: 30,
                     marginBottom: 33,
                   }}
                 >
@@ -90,10 +90,11 @@ export default function Login() {
                 }}
               >
                 <View style={styles.hideButton}>
-                  <Text style={{ color: "#1B4371", fontSize: 16,fontWeight:"400",lineHeight:19 }}>Показать</Text>
+                  <Text style={{ color: "#1B4371", fontSize: 16,fontWeight:"400",lineHeight:19, }}>Показать</Text>
                 </View>
               </TouchableOpacity>
-              <Pressable>
+              <Pressable onPress={() => navigation.navigate("Registration")}>
+                
                 <Text style={{ textAlign: "center", color: "#1b4371" }}>
                   Нет аккаунта? Зарегистрироваться
                 </Text>
@@ -112,7 +113,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: 343,
     backgroundColor: "#FF6C00",
-    marginBottom: 16,
     borderRadius: 100,
   },
   image: {
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   input: {
     borderWidth: 1,
     borderColor: "#E8E8E8",
-    borderRadius: "8px",
+    borderRadius: 8,
     width: 343,
     height: 50,
     marginBottom: 16,
@@ -147,10 +147,9 @@ const styles = StyleSheet.create({
   },
   hideButton: {
     left: 130,
-    top: -159,
+    top: -145,
     height: 19,
     width: 71,
     color: "#1B4371",
-    marginBottom: 16,
   },
 });

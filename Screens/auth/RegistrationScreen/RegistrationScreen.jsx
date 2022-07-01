@@ -11,20 +11,36 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
   Keyboard,
+  Button,
 } from "react-native";
+import * as ImagePicker from "expo-image-picker";
 
 const initialState = {
   email: "",
   password: "",
   login: "",
 };
-export default function Register() {
+export default function Register({ navigation }) {
   const [passwordHide, setHide] = useState(true);
-
   const [registerInfo, setRegister] = useState(initialState);
+  const [image, setImage] = useState(null);
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      setImage(result.uri);
+    }
+  };
 
   const handleSubmit = () => {
-    console.log(registerInfo);
     setRegister(initialState);
   };
   return (
@@ -35,11 +51,24 @@ export default function Register() {
     >
       <View style={styles.container}>
         <ImageBackground
-          source={require("../../share/img/Photo.png")}
+          source={require("../../../share/img/Photo.png")}
           style={styles.image}
         >
-          <Image style={styles.avatar} />
+          <TouchableOpacity onPress={pickImage} style={{ zIndex: 1000 }}>
+            <View style={styles.buttonImageAdd}>
+              <Text
+                style={{
+                  color: "rgba(255, 108, 0, 1)",
+                  fontSize: 17,
+                  textAlign: "center",
+                }}
+              >
+                +
+              </Text>
+            </View>
 
+            <Image style={styles.avatar} source={{ uri: image }} />
+          </TouchableOpacity>
           <KeyboardAvoidingView
             behavior={Platform.OS == "ios" ? "padding" : "height"}
             keyboardVerticalOffset={-150}
@@ -51,7 +80,6 @@ export default function Register() {
                     textAlign: "center",
                     fontWeight: "bold",
                     fontSize: 30,
-                    marginBottom: 33,
                   }}
                 >
                   Регистрация
@@ -69,7 +97,7 @@ export default function Register() {
               </View>
               <View>
                 <TextInput
-                 value={registerInfo.email}
+                  value={registerInfo.email}
                   style={styles.input}
                   placeholder={"Адрес электронной почты"}
                   onChangeText={(value) =>
@@ -77,14 +105,17 @@ export default function Register() {
                   }
                 />
               </View>
-              <View style={{ marginBottom: 43 }}>
+              <View style={{ marginBottom: 43 - 16 }}>
                 <TextInput
                   style={styles.input}
                   secureTextEntry={passwordHide}
                   placeholder={"Пароль"}
                   value={registerInfo.password}
                   onChangeText={(value) =>
-                    setRegister((prevState) => ({ ...prevState, password: value }))
+                    setRegister((prevState) => ({
+                      ...prevState,
+                      password: value,
+                    }))
                   }
                 />
               </View>
@@ -101,10 +132,19 @@ export default function Register() {
                 }}
               >
                 <View style={styles.hideButton}>
-                  <Text style={{ color: "#1B4371", fontSize: 16,fontWeight:"400",lineHeight:19 }}>Показать</Text>
+                  <Text
+                    style={{
+                      color: "#1B4371",
+                      fontSize: 16,
+                      fontWeight: "400",
+                      lineHeight: 19,
+                    }}
+                  >
+                    Показать
+                  </Text>
                 </View>
               </TouchableOpacity>
-              <Pressable>
+              <Pressable onPress={() => navigation.navigate("Login")}>
                 <Text style={{ textAlign: "center", color: "#1b4371" }}>
                   Уже есть аккаунт? Войти
                 </Text>
@@ -123,7 +163,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: 343,
     backgroundColor: "#FF6C00",
-    marginBottom: 16,
     borderRadius: 100,
   },
   image: {
@@ -153,8 +192,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     width: 343,
     height: 50,
-    marginBottom: 16,
     padding: 16,
+    marginBottom: 16,
   },
   avatar: {
     zIndex: 1000,
@@ -168,10 +207,20 @@ const styles = StyleSheet.create({
   },
   hideButton: {
     left: 130,
-    top: -159,
+    top: -129,
     height: 19,
     width: 71,
     color: "#1B4371",
-    marginBottom: 16,
+  },
+  buttonImageAdd: {
+    backgroundColor: "#FFFFFF",
+    borderWidth: 1,
+    width: 25,
+    height: 25,
+    right: -260,
+    top: 150,
+    zIndex: 150000,
+    borderColor: "rgba(255, 108, 0, 1)",
+    borderRadius: 16,
   },
 });

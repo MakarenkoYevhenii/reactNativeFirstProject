@@ -1,13 +1,14 @@
-import Register from "./Screens/RegistrationScreen/RegistrationScreen"
-import Login from "./Screens/LoginScreen/LoginScreen"
+
+import { NavigationContainer } from "@react-navigation/native";
+import { useRoute } from "./router";
 
 export default function App() {
- 
+
+
+  const routing = useRoute(true);
   return (
-   <>
-   {/* <Login/> */}
-   <Register/>
-   </>
+    <>
+      <NavigationContainer>{routing}</NavigationContainer>
+    </>
   );
 }
-
