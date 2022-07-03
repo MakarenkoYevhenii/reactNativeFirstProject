@@ -14,6 +14,8 @@ import {
   Keyboard,
 } from "react-native";
 
+import { useDispatch } from "react-redux";
+import { authSignInUser } from "../../redux/auth/authOperation";
 
 const initialState = {
   email: "",
@@ -22,10 +24,10 @@ const initialState = {
 export default function Login({navigation}) {
   const [passwordHide, setHide] = useState(true);
   const [loginInfo, setLogin] = useState(initialState);
-
+  const dispatch=useDispatch()
   const handleSubmit = (e) => {
-    console.log(loginInfo);
-    setLogin(initialState);
+    dispatch(authSignInUser(loginInfo))
+    // setLogin(initialState);
   };
   return (
     <TouchableWithoutFeedback

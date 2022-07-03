@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, View, FlatList, Image } from "react-native";
+import { StyleSheet, Text, View, FlatList, Image,Button } from "react-native";
+import MapScreen from "../MapScreen/MapScreen";
 
 export default function PostsScreen({ navigation, route }) {
   const [posts, setPosts] = useState([]);
@@ -8,10 +9,9 @@ export default function PostsScreen({ navigation, route }) {
       setPosts((prevState) => [...prevState, route.params]);
     }
   }, [route.params]);
-  console.log(posts);
+
   return (
     <View style={styles.container}>
-      <Text>gkdfkgj</Text>
       <FlatList
       showsVerticalScrollIndicator={false}
         data={posts}
@@ -25,6 +25,9 @@ export default function PostsScreen({ navigation, route }) {
           </View>
         )}
       />
+     <Button title="go to map" onPress={() => navigation.navigate("Map")} />
+     <Button title="go to comments" onPress={() => navigation.navigate("Comments")} />
+
     </View>
   );
 }

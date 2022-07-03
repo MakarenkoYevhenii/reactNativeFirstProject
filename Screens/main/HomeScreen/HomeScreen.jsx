@@ -3,21 +3,23 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
-  ImageBackground,
-  Pressable,
-  Image,
-  KeyboardAvoidingView,
-  TouchableWithoutFeedback,
-  TouchableOpacity,
-  Keyboard,
 } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
+import PostsScreen from "../PostsScreen/PostsScreen";
+import CommentsScreen from "../CommentsScreen/CommentsScreen"
+import MapScreen from "../MapScreen/MapScreen"
+const NestedScreen = createStackNavigator();
+export default function HomeScreen({navigation,route}) {
 
-export default function HomeScreen({navigation}) {
     return (
-        <View style={styles.container}>
-          <Text>HomeScreen</Text>
-        </View>
+      <NestedScreen.Navigator>
+      <NestedScreen.Screen
+        name="DefaultScreen"
+        component={PostsScreen}
+      />
+      <NestedScreen.Screen name="Comments" component={CommentsScreen} />
+      <NestedScreen.Screen name="Map" component={MapScreen} />
+    </NestedScreen.Navigator>
       );
     }
     const styles = StyleSheet.create({

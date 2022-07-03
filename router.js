@@ -9,6 +9,8 @@ import CreatePostsScreen from "./Screens/main/CreatePostsScreen/CreatePostsScree
 import ProfileScreen from "./Screens/main/ProfileScreen/ProfileScreen";
 import Register from "./Screens/auth/RegistrationScreen/RegistrationScreen";
 import Login from "./Screens/auth/LoginScreen/LoginScreen";
+import MapScreen from "./Screens/main/MapScreen/MapScreen";
+import HomeScreen from "./Screens/main/HomeScreen/HomeScreen";
 
 const MainStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
@@ -33,9 +35,10 @@ export const useRoute = (isAuth) => {
 
   return (
     <MainTab.Navigator tabBarOptions={{ showLabel: false }}>
+      
       <MainTab.Screen
         name="Home"
-        component={PostsScreen}
+        component={HomeScreen}
         options={{
           headerShown: false,
           tabBarIcon: ({focused, size, color}) => (
@@ -63,6 +66,8 @@ export const useRoute = (isAuth) => {
           ),
         }}
       />
+       
     </MainTab.Navigator>
+
   );
 };

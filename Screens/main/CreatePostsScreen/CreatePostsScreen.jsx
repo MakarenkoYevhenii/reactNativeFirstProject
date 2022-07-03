@@ -12,18 +12,19 @@ import * as Location from 'expo-location';
 export default function CreatePostsScreen({ navigation }) {
   const [camera, setCamera] = useState(null);
   const [photo, setPhoto] = useState("");
+  const [location, setLocation] = useState("");
   const takePhoto = async () => {
     const data = await camera.takePictureAsync();
     const source = data.uri;
     const accsesToLocation=await Location.requestForegroundPermissionsAsync()
     const location=await Location.getCurrentPositionAsync()
+    setLocation(location)
+
     setPhoto(source);
-    console.log(location);
   };
   
   const sendPhoto =async()=>{
-    console.log(navigation);
-    navigation.navigate("Home",{photo})
+    navigation.navigate("DefaultScreen",{photo})
   }
   return (
     <View style={styles.container}>

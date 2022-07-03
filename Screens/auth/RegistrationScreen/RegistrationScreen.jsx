@@ -11,19 +11,26 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
   Keyboard,
-  Button,
 } from "react-native";
+import { useDispatch } from "react-redux";
 import * as ImagePicker from "expo-image-picker";
-
+import { authSignUpUser } from "../../redux/auth/authOperation";
 const initialState = {
   email: "",
   password: "",
   login: "",
 };
+
 export default function Register({ navigation }) {
+
   const [passwordHide, setHide] = useState(true);
   const [registerInfo, setRegister] = useState(initialState);
   const [image, setImage] = useState(null);
+
+
+  const dispatch=useDispatch()
+
+
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -32,16 +39,15 @@ export default function Register({ navigation }) {
       aspect: [4, 3],
       quality: 1,
     });
-
-    console.log(result);
-
     if (!result.cancelled) {
       setImage(result.uri);
     }
   };
 
   const handleSubmit = () => {
-    setRegister(initialState);
+    // setRegister(initialState);
+    dispatch(authSignUpUser(registerInfo))
+
   };
   return (
     <TouchableWithoutFeedback
