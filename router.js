@@ -36,6 +36,7 @@ export const useRoute = (isAuth) => {
   return (
     <MainTab.Navigator tabBarOptions={{ showLabel: false }}>
       
+     
       <MainTab.Screen
         name="Home"
         component={HomeScreen}
@@ -56,7 +57,7 @@ export const useRoute = (isAuth) => {
           ),
         }}
       />
-      <MainTab.Screen
+        <MainTab.Screen
         name="Profile"
         component={ProfileScreen}
         options={{
@@ -66,7 +67,6 @@ export const useRoute = (isAuth) => {
           ),
         }}
       />
-       
     </MainTab.Navigator>
 
   );

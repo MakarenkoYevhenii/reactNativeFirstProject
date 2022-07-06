@@ -9,7 +9,6 @@ const main = () => {
   const [user, setUser] = useState(null);
   const auth = getAuth();
   const { stateChange } = useSelector((state) => state.auth);
-    console.log(stateChange);
   const dispatch = useDispatch();
   onAuthStateChanged(auth, (user) => {
     setUser(user);

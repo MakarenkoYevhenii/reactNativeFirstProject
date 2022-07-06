@@ -27,7 +27,6 @@ export default function Login({navigation}) {
   const dispatch=useDispatch()
   const handleSubmit = (e) => {
     dispatch(authSignInUser(loginInfo))
-    // setLogin(initialState);
   };
   return (
     <TouchableWithoutFeedback

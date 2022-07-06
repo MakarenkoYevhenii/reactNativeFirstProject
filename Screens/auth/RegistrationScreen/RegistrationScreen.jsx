@@ -41,13 +41,12 @@ export default function Register({ navigation }) {
     });
     if (!result.cancelled) {
       setImage(result.uri);
+      console.log(result.uri);
     }
   };
 
   const handleSubmit = () => {
-    // setRegister(initialState);
     dispatch(authSignUpUser(registerInfo))
-
   };
   return (
     <TouchableWithoutFeedback

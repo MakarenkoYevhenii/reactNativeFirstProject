@@ -21,12 +21,15 @@ const authSignUpUser =
       );
       await updateProfile(auth.currentUser, {
         displayName: login,
+        photoURL:"http://www.arunpol.nic.in/img/Martyrs/Abhiymanyu%20Kr%20Singh.jpg"
       });
-      const { uid, displayName } = auth.currentUser;
+      const { uid, displayName,photoURL,email} = auth.currentUser;
       dispatch(
         authSlice.actions.UpdateUserProfile({
           userId: uid,
           nickname: displayName,
+          photoURL:photoURL,
+          email:photoURL,
         })
       );
     } catch (error) {
@@ -42,12 +45,13 @@ const authSignInUser =
     const auth = getAuth();
     try {
       const userLogIn = await signInWithEmailAndPassword(auth, email, password);
-      const { uid, displayName } = userLogIn.user;
-
+      const { uid, displayName,photoURL } = userLogIn.user;
       dispatch(
         authSlice.actions.UpdateUserProfile({
           userId: uid,
           nickname: displayName,
+          photoURL:photoURL,
+          email:email,
         })
       );
     } catch (error) {
@@ -65,6 +69,8 @@ const AuthStateChangeUser = () => async (dispatch, getState) => {
         authSlice.actions.UpdateUserProfile({
           userId: user.uid,
           nickname: user.displayName,
+          photoURL:user.photoURL,
+          email:user.email
         })
       );
       dispatch(authSlice.actions.AuthStateChange(true));
