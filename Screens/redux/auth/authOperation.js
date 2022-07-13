@@ -10,8 +10,9 @@ import {
 import { authSlice } from "./authReduser";
 
 const authSignUpUser =
-  ({ email, password, login }) =>
+  ( {email, password, login} ) =>
   async (dispatch, getState) => {
+    // console.log(email);
     const auth = getAuth();
     try {
       const userLogIn = await createUserWithEmailAndPassword(
@@ -23,13 +24,13 @@ const authSignUpUser =
         displayName: login,
         photoURL:"http://www.arunpol.nic.in/img/Martyrs/Abhiymanyu%20Kr%20Singh.jpg"
       });
-      const { uid, displayName,photoURL,email} = auth.currentUser;
+      const { uid, displayName,photoURL} = auth.currentUser;
       dispatch(
         authSlice.actions.UpdateUserProfile({
           userId: uid,
           nickname: displayName,
           photoURL:photoURL,
-          email:photoURL,
+          email:email,
         })
       );
     } catch (error) {
@@ -88,5 +89,6 @@ const authSignOutUser = () => async (dispatch, getState) => {
     console.log(errorMessage);
   }
 };
+
 
 export { authSignUpUser, authSignInUser, authSignOutUser, AuthStateChangeUser };

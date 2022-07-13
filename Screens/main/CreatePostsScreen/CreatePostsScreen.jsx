@@ -29,13 +29,13 @@ export default function CreatePostsScreen({ navigation }) {
   const [url, setUrl] = useState("");
 
   const {userId,nickname}= useSelector((state)=>state.auth)
-  console.log( useSelector((state)=>state.auth));
+
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
     })();
   }, []);
-
+  
   const takePhoto = async () => {
     const data = await camera.takePictureAsync();
     const source = data.uri;
